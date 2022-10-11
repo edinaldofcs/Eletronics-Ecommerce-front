@@ -1,6 +1,4 @@
 import type { NextPage } from "next";
-import Link from "next/link";
-
 interface Props {
   text: string;
   link?: string;

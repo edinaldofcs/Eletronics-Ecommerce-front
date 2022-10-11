@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Image from "next/image";
 import { BsCart3 } from "react-icons/bs";
 import { useUserContext } from "../../context/useContext";
 

@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { userAgent } from "next/server";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CartIcon from "../../components/cart";
 import Input from "../../components/input";
 import Logo from "../../components/logo";
@@ -10,13 +9,7 @@ import { useUserContext } from "../../context/useContext";
 
 const Header: NextPage = () => {
   const [inputValue, setInputValue] = useState("");
-  const { user, updateUser } = useUserContext();
-  useEffect(() => {
-    const myUser = localStorage.getItem("eletronics");
-    if (myUser) {
-      updateUser(JSON.parse(myUser));
-    }
-  }, []);
+  const { user } = useUserContext();  
 
   return (
     <div className="w-full bg-blue-800  flex flex-row-reverse items-center justify-around  px-2 py-2 sm:flex-row">

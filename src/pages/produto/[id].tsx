@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import { products } from "../../mock/products";
-import Link from "next/link";
 import Button from "../../components/button";
 import { useUserContext } from "../../context/useContext";
 import { MyNumber } from "../../components/numberFormat";
@@ -16,7 +14,7 @@ export async function getServerSideProps(context: any) {
   const product = await res.json();
   product.img = JSON.parse(product.img);
   product.description = JSON.parse(product.description);
-  // Pass data to the page via props
+ 
   return { props: { product } };
 }
 
@@ -25,13 +23,7 @@ const Product: NextPage<any> = ({ product }) => {
   const [rotate, setRotate] = useState(false);
   const [image, setImage] = useState(product.img[0]);
   const { user, updateUser } = useUserContext();
-  useEffect(() => {
-    const items = localStorage.getItem("eletronics");
-    if (items) {
-      updateUser(JSON.parse(items));
-    }
-  }, []);
-
+ 
   async function buy(id: string) {
     if (!user.userName) {
       router.push("/login");

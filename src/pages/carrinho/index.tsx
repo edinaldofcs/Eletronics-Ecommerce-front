@@ -124,15 +124,7 @@ const PayInfos = (props: { text: string; value: number }) => {
 const Cart: NextPage = () => {
   const [total, setTotal] = useState(0);
 
-  const { updateUser, user } = useUserContext();
-
-  useEffect(() => {
-    const items = localStorage.getItem("eletronics");
-
-    if (items) {
-      updateUser(JSON.parse(items));
-    }
-  }, []);
+  const { user } = useUserContext();
 
   useEffect(() => {
     if(user.cart != undefined && user.cart?.length > 0 ){

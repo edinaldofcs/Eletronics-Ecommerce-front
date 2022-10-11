@@ -1,12 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import type { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { useUserContext } from "../../context/useContext";
-import CartIcon from "../cart";
-
 interface Props {
   text: string;
   link?: string;

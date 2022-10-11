@@ -1,13 +1,10 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
 import Banner from "../components/banner";
 import CategoryCard from "../components/catagoryCard";
 import Checkout from "../components/checkout";
 import ProductCard from "../components/productCard";
 import { useUserContext } from "../context/useContext";
 import { CategorieProps, ProductProps } from "../interfaces";
-// import { categories } from "../mock/categories";
-import { products } from "../mock/products";
 
 export async function getServerSideProps(context: any) {
   const data = await fetch("http://localhost:5000/product/bestSellers");
@@ -23,14 +20,7 @@ const Home: NextPage<{
   bestSellers: ProductProps[];
   categories: CategorieProps[];
 }> = ({ bestSellers, categories }) => {
-  const { updateUser, user } = useUserContext();
-
-  useEffect(() => {
-    const items = localStorage.getItem("eletronics");
-    if (items) {
-      updateUser(JSON.parse(items));
-    }
-  }, []);
+  const { user } = useUserContext();
 
   return (
     <>    

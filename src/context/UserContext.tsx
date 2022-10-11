@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 type User = {
   acess_token: string | null;
@@ -34,6 +34,12 @@ export const Provider = ({ children }: any) => {
   //     };
   //   });
   // };
+  useEffect(() => {
+    const myUser = localStorage.getItem("eletronics");
+    if (myUser) {
+      updateUser(JSON.parse(myUser));
+    }
+  }, []);
   const updateUser = (user: User) => {
     setUser(user);
   };

@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useFormik } from "formik";
 import { join } from "../../components/forms/schema";
 import { useUserContext } from "../../context/useContext";
-import { userAgent } from "next/server";
 import { useRouter } from "next/router";
 
 interface InitialValuesProps {

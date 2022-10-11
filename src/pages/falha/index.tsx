@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 
-const Fail: NextPage = () => {
-  
+const Fail: NextPage = () => {  
   
   return (
     <div className="h-96 flex items-center justify-center">

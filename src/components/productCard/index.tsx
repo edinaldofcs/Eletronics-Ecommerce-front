@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
-import router, { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useUserContext } from "../../context/useContext";
 import { FragmentProductProps } from "../../interfaces";
 import Button from "../button";
-import { NumericFormat } from "react-number-format";
 import { MyNumber } from "../numberFormat";
 
 const ProductCard: NextPage<FragmentProductProps> = ({
