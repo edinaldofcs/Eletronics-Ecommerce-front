@@ -25,7 +25,7 @@ const Login: NextPage = () => {
       }),
     };
 
-    const data = await fetch("http://localhost:5000/user/login", requestInfo);
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, requestInfo);
     const newUser = await data.json();
     updateUser(newUser);
     localStorage.setItem(`eletronics`, JSON.stringify(newUser))

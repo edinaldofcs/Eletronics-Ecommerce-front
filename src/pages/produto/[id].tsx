@@ -10,7 +10,7 @@ export async function getServerSideProps(context: any) {
   // const router = useRouter();
   const { id } = context.query;
 
-  const res = await fetch(`http://localhost:5000/product/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${id}`);
   const product = await res.json();
   product.img = JSON.parse(product.img);
   product.description = JSON.parse(product.description);
@@ -95,7 +95,7 @@ const Product: NextPage<any> = ({ product }) => {
             <span className="text-blue-800 font-semibold">Eletronics</span>
           </p>
           <h2 className="text-blue-800 text-2xl font-medium">
-            <MyNumber price={product.price * 1} />
+            <MyNumber price={product.price - product.price * product.discount} />
           </h2>
           <p className="text-gray-800">A vista no pix com até 15%off</p>
           <MyNumber

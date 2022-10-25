@@ -24,7 +24,7 @@ const Button: NextPage<Props> = ({
               background
                 ? `${background} text-blue-800 border font-semibold border-blue-800`
                 : "bg-blue-800 text-white"
-            }  w-full py-1 duration-300 ease-in-out hover:brightness-125`}
+            }  w-full py-1 px-1 duration-300 ease-in-out hover:brightness-125`}
           >
             {text}
           </button>
@@ -37,7 +37,7 @@ const Button: NextPage<Props> = ({
             background
               ? `${background} text-blue-800 border font-semibold border-blue-800`
               : "bg-blue-800 text-white"
-          }  w-full py-1 duration-300 ease-in-out hover:brightness-125`}
+          }  w-full py-1 px-1 duration-300 ease-in-out hover:brightness-125`}
         >
           {text}
         </button>

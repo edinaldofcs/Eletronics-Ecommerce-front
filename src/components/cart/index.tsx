@@ -10,7 +10,6 @@ const CartIcon: NextPage = () => {
           ?.map((item) => item.quantity)
           .reduce((a: number, b: number) => a + b)
       : 0;
-  console.log(items);
 
   return (
     <a href="/carrinho" className="relative w-fit">

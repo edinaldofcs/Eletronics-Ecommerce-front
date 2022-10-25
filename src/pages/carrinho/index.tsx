@@ -4,6 +4,7 @@ import Button from "../../components/button";
 import { useUserContext } from "../../context/useContext";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { MyNumber } from "../../components/numberFormat";
+import Router from "next/router";
 
 const CartItens = ({ item, id }: any) => {
   const { updateUser, user } = useUserContext();
@@ -22,7 +23,7 @@ const CartItens = ({ item, id }: any) => {
     };
 
     const data = await fetch(
-      `http://localhost:5000/cart/update/${productInfos.id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/cart/update/${productInfos.id}`,
       requestInfo
     );
 
@@ -42,28 +43,34 @@ const CartItens = ({ item, id }: any) => {
   }
 
   async function removeItem(id: string) {
-    const remove = await fetch(`http://localhost:5000/cart/delete/${item.id}`, {
-      method: "DELETE",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + user.acess_token,
-      }),
-    });
-    const data = await fetch(`http://localhost:5000/user/updateUserCart`, {
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + user.acess_token,
-      }),
-    });
+    const remove = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/cart/delete/${item.id}`,
+      {
+        method: "DELETE",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + user.acess_token,
+        }),
+      }
+    );
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/user/updateUserCart`,
+      {
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + user.acess_token,
+        }),
+      }
+    );
     const updateUserCart = await data.json();
     updateUser({ ...user, cart: [...updateUserCart] });
     localStorage.setItem(
       `eletronics`,
       JSON.stringify({ ...user, cart: [...updateUserCart] })
     );
-  } 
+  }
 
   return (
     <div className="flex px-1 border-b justify-between flex-col sm:flex-row sm:items-center">
@@ -127,16 +134,34 @@ const Cart: NextPage = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
-    if(user.cart != undefined && user.cart?.length > 0 ){
+    if (user.cart != undefined && user.cart?.length > 0) {
       const price = JSON.parse(`${localStorage.getItem("eletronics")}`)
         .cart?.map((i: any) => {
           return i.price * i.quantity;
         })
         .reduce((a: number, b: number) => a + b);
-  
+
       setTotal(price);
     }
   }, [user]);
+
+  async function handleCheckout() {
+    const checkout = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
+      {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + user.acess_token,
+        }),
+      }
+    );
+    const res = await checkout.json();
+    if (res.statusCode === 200) {
+      Router.push(res.url);
+    }
+  }
 
   return (
     <>
@@ -162,13 +187,11 @@ const Cart: NextPage = () => {
             </div>
             <div className="shadow-sm bg-white w-[100%] max-h-[450px] flex flex-col gap-2 px-4 py-4 sm:w-[40%]">
               <h2 className="font-bold text-gray-900 text-2xl mb-2">Resumo</h2>
-              <PayInfos text="Valor dos produtos:" value={total -10} />
-              <PayInfos text="Frete:" value={10} />
               <PayInfos text="Total:" value={total} />
               <Button
                 text="Ir para o Pagamento"
-                link="/"
                 background="bg-white"
+                handleOnClick={handleCheckout}
               />
               <Button text="Continuar comprando" link="/" />
             </div>

@@ -1,16 +1,17 @@
 import type { NextPage } from "next";
 import Banner from "../components/banner";
-import CategoryCard from "../components/catagoryCard";
-import Checkout from "../components/checkout";
+import CategoryCard from "../components/categoryCard";
 import ProductCard from "../components/productCard";
 import { useUserContext } from "../context/useContext";
 import { CategorieProps, ProductProps } from "../interfaces";
 
 export async function getServerSideProps(context: any) {
-  const data = await fetch("http://localhost:5000/product/bestSellers");
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/product/bestSellers`
+  );
   const bestSellers = await data.json();
 
-  const res = await fetch("http://localhost:5000/category");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category`);
   const categories = await res.json();
 
   return { props: { bestSellers, categories } };
@@ -20,11 +21,9 @@ const Home: NextPage<{
   bestSellers: ProductProps[];
   categories: CategorieProps[];
 }> = ({ bestSellers, categories }) => {
-  const { user } = useUserContext();
-
+  const {user} = useUserContext()
   return (
-    <>    
-      {/* <Checkout /> */}      
+    <>
       <Banner />
       <div className="flex flex-col  h-full min-h-[100vh] justify-center items-center px-8 py-4">
         <h1 className="w-full" id="categorias">

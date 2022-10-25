@@ -6,7 +6,7 @@ export async function getServerSideProps(context: any) {
   // const router = useRouter();
   const { slug } = context.query;
 
-  const res = await fetch(`http://localhost:5000/category/${slug}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category/${slug}`);
   const category = await res.json();
   
   return { props: { category } };

@@ -28,7 +28,7 @@ const Register: NextPage = () => {
     };
 
     const data = await fetch(
-      "http://localhost:5000/user/register",
+      `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
       requestInfo
     );
     console.log(data);
