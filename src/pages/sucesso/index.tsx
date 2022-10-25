@@ -5,11 +5,13 @@ import { useUserContext } from "../../context/useContext";
 
 const Success: NextPage = () => {
   const { user, updateUser } = useUserContext();
-  const [load, setLoad] = useState(true);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    async function pagamento() {
+    if (update) return;
+    async function getUserCar() {
       const myUser = localStorage.getItem("eletronics");
+
       if (!myUser) return;
       const newUser = JSON.parse(myUser);
 
@@ -25,16 +27,22 @@ const Success: NextPage = () => {
         }
       );
       const cart = await data.json();
-      localStorage.setItem(
-        "eletronics",
-        JSON.stringify({ ...newUser, cart: cart })
-      );
-      updateUser({ ...newUser, cart: cart });
-      setLoad(false);
+      localStorage.setItem("eletronics", JSON.stringify({ ...newUser, cart }));
     }
 
-    pagamento();
-  }, []);
+    getUserCar();
+    setUpdate(true);
+  }, [update]);
+
+  useEffect(() => {
+    if (update) {
+      const myUser = localStorage.getItem("eletronics");
+
+      if (!myUser) return;
+      const newUser = JSON.parse(myUser);
+      updateUser(newUser);
+    }
+  }, [update]);
 
   return (
     <div className="h-96 flex flex-col items-center justify-center">

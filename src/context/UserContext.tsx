@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-type User = {
+export type User = {
   acess_token: string | null;
   userName: string | null;
   cart?: {
@@ -14,7 +14,6 @@ type User = {
 
 interface IContext {
   user: User;
-  // updateUser: (user: Partial<User>) => void;
   updateUser: (user: User) => void;
 }
 
@@ -25,21 +24,19 @@ export const Provider = ({ children }: any) => {
     acess_token: null,
     userName: null,
   });
+  const [update, setUpdate] = useState(false);
 
-  // const updateUser = (user: Partial<User>) => {
-  //   setUser((prev) => {
-  //     return {
-  //       ...prev,
-  //       ...user,
-  //     };
-  //   });
-  // };
   useEffect(() => {
     const myUser = localStorage.getItem("eletronics");
     if (myUser) {
+      window.addEventListener("storage", (e) => {
+        updateUser(JSON.parse(myUser));
+      });
+
       updateUser(JSON.parse(myUser));
     }
   }, []);
+  
   const updateUser = (user: User) => {
     setUser(user);
   };
