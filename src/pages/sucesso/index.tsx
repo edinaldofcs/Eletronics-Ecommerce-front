@@ -43,7 +43,7 @@ const Success: NextPage<{ cart: CartProps[] | boolean | [] }> = ({ cart }) => {
       }
       setCarIsNotEmpty(true);
     }
-  }, [carIsNotEmpty]);
+  }, [carIsNotEmpty, updateUser]);
 
   return (
     <div className="h-96 flex flex-col items-center justify-center">
