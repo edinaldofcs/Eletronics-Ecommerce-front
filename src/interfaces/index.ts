@@ -47,3 +47,11 @@ export interface CategorieProps {
   img: string;
   products?: Productsprops[]
 }
+
+
+export interface CartProps{
+  id: string;
+  userId: string;
+  productId: string;
+  quantity: number;
+}

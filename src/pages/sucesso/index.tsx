@@ -2,47 +2,48 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Button from "../../components/button";
 import { useUserContext } from "../../context/useContext";
+import { CartProps } from "../../interfaces";
 
-const Success: NextPage = () => {
-  const { user, updateUser } = useUserContext();
-  const [update, setUpdate] = useState(false);
+export async function getServerSideProps(context: any) {
+  const { token } = context.query;
+  if (token) {
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/user/validatetoken`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
 
-  useEffect(() => {
-    if (update) return;
-    async function getUserCar() {
-      const myUser = localStorage.getItem("eletronics");
-
-      if (!myUser) return;
-      const newUser = JSON.parse(myUser);
-
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/updateUserCart`,
-        {
-          method: "GET",
-          headers: new Headers({
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + newUser.acess_token,
-          }),
-        }
-      );
+    if (data.status == 200) {
       const cart = await data.json();
-      localStorage.setItem("eletronics", JSON.stringify({ ...newUser, cart }));
-    }
 
-    getUserCar();
-    setUpdate(true);
-  }, [update]);
+      return { props: { cart } };
+    }
+    return { props: { cart: false } };
+  }
+  return { props: { cart: false } };
+}
+
+const Success: NextPage<{ cart: CartProps[] | boolean | [] }> = ({ cart }) => {
+  const { user, updateUser } = useUserContext();
+  const [carIsNotEmpty, setCarIsNotEmpty] = useState(cart);
 
   useEffect(() => {
-    if (update) {
+    if (typeof carIsNotEmpty == "object" && carIsNotEmpty.length == 0) {
       const myUser = localStorage.getItem("eletronics");
 
-      if (!myUser) return;
-      const newUser = JSON.parse(myUser);
-      updateUser(newUser);
+      if (myUser) {
+        const newUser = { ...JSON.parse(myUser), cart: [] };
+        updateUser(newUser)
+        localStorage.setItem("eletronics", JSON.stringify(newUser));
+      }
+      setCarIsNotEmpty(true);
     }
-  }, [update]);
+  }, [carIsNotEmpty]);
 
   return (
     <div className="h-96 flex flex-col items-center justify-center">

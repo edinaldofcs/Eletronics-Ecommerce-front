@@ -147,7 +147,7 @@ const Cart: NextPage = () => {
 
   async function handleCheckout() {
     const checkout = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout`,
+      `${process.env.NEXT_PUBLIC_API_URL}/cart/checkout/${user.acess_token}`,
       {
         method: "POST",
         headers: new Headers({

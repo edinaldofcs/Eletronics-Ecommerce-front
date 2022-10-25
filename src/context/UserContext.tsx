@@ -28,11 +28,7 @@ export const Provider = ({ children }: any) => {
 
   useEffect(() => {
     const myUser = localStorage.getItem("eletronics");
-    if (myUser) {
-      window.addEventListener("storage", (e) => {
-        updateUser(JSON.parse(myUser));
-      });
-
+    if (myUser) {      
       updateUser(JSON.parse(myUser));
     }
   }, []);
