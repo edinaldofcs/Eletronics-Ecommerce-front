@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import { BsCart3 } from "react-icons/bs";
 import { useUserContext } from "../../context/useContext";
 
@@ -12,12 +13,16 @@ const CartIcon: NextPage = () => {
       : 0;
 
   return (
-    <a href="/carrinho" className="relative w-fit">
-      <BsCart3 className="w-6 h-6 text-white" />
+    <div className="relative w-fit">
+
+    <Link href="/carrinho" >
+      <BsCart3 className="w-6 h-6 text-white cursor-pointer" />
+      </Link>
       <div className="h-4 w-4 bg-[rgba(0,0,0,0.8)] rounded-full absolute bottom-0 right-0 flex items-center justify-center border-[1px]">
-        <p className="text-white text-sm">{items}</p>
+      <Link href="/carrinho" ><p className="text-white text-sm cursor-pointer">{items}</p></Link>
       </div>
-    </a>
+    
+    </div>
   );
 };
 
