@@ -17,12 +17,12 @@ const Footer: NextPage = () => {
         <Logo />
 
         <form className="flex gap-2 flex-col items-center sm:flex-row">
-          <label htmlFor="email" className="w-[60%] text-center min-w-[200px] text-white">Receber nossas ofertas?</label>
+          <label htmlFor="email3" className="w-[60%] text-center min-w-[200px] text-white">Receber nossas ofertas?</label>
           <Input
             placeholder="Digite seu email"
             value={inputValue}
             type="email"
-            id="email"
+            id="email3"
             onChange={(e) => setInputValue(e.target.value)}
           />
           <button

@@ -7,7 +7,7 @@ import { useState } from "react";
 interface InitialValuesProps {
   email2: string;
   name: string;
-  password: string;
+  password2: string;
   confirmpassword: string;
 }
 
@@ -54,7 +54,7 @@ const Register: NextPage = () => {
   } = useFormik<InitialValuesProps>({
     initialValues: {
       email2: "",
-      password: "",
+      password2: "",
       confirmpassword: "",
       name: "",
     },
@@ -114,21 +114,21 @@ const Register: NextPage = () => {
             <label htmlFor="password">Senha</label>
             <input
               type="password"
-              id="password"
-              value={values.password}
+              id="password2"
+              value={values.password2}
               onChange={handleChange}
               placeholder="Ex: X@xx11"
               onBlur={handleBlur}
               className={`border border-gray-700 pl-2 h-8 ${
-                errors.password && touched.password && "border-red-600 border"
+                errors.password2 && touched.password2 && "border-red-600 border"
               }`}
             />
             <span
               className={`h-8 ${
-                errors.password && touched.password && "text-red-700"
+                errors.password2 && touched.password2 && "text-red-700"
               }`}
             >
-              {errors.password && touched.password && "Senha inválida"}
+              {errors.password2 && touched.password2 && "Senha inválida"}
             </span>
           </div>
           <div className="flex flex-col">

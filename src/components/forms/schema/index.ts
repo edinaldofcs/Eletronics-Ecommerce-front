@@ -22,7 +22,7 @@ export const register = yup.object().shape({
       message: "Mínimo 6 caractéres",
     })
     .required("Requerido"),
-  password: yup
+  password2: yup
     .string()
     .min(6)
     .matches(passwordType, {
