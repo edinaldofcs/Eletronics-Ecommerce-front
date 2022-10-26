@@ -14,7 +14,7 @@ export const join = yup.object().shape({
 });
 
 export const register = yup.object().shape({
-  email: yup.string().email("Email inválido").required("Requerido"),
+  email2: yup.string().email("Email inválido").required("Requerido"),
   name: yup
     .string()
     .min(6)

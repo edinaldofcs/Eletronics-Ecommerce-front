@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface InitialValuesProps {
-  email: string;
+  email2: string;
   name: string;
   password: string;
   confirmpassword: string;
@@ -53,7 +53,7 @@ const Register: NextPage = () => {
     handleSubmit,
   } = useFormik<InitialValuesProps>({
     initialValues: {
-      email: "",
+      email2: "",
       password: "",
       confirmpassword: "",
       name: "",
@@ -74,21 +74,21 @@ const Register: NextPage = () => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              id="email"
-              value={values.email}
+              id="email2"
+              value={values.email2}
               onChange={handleChange}
               placeholder="Digite o seu email"
               onBlur={handleBlur}
               className={`border border-gray-700 pl-2 h-8 ${
-                errors.email && touched.email && "border-red-600 border"
+                errors.email2 && touched.email2 && "border-red-600 border"
               }`}
             />
             <span
               className={`h-8 ${
-                errors.email && touched.email && "text-red-700"
+                errors.email2 && touched.email2 && "text-red-700"
               }`}
             >
-              {errors.email && touched.email && "Email inválido"}
+              {errors.email2 && touched.email2 && "Email inválido"}
             </span>
           </div>
           <div className="flex flex-col">
