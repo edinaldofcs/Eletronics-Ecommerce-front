@@ -15,7 +15,7 @@ const Login: NextPage = () => {
   const onSubmit = async (values: any, actions: any) => {
     // console.log(values);
     //actions.resetForm();
-
+    
     const requestInfo = {
       method: "POST",
       body: JSON.stringify(values),
@@ -24,8 +24,9 @@ const Login: NextPage = () => {
         Accept: "application/json",
       }),
     };
-
     const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, requestInfo);
+    // console.log(requestInfo)
+    // return
     const newUser = await data.json();
     updateUser(newUser);
     localStorage.setItem(`eletronics`, JSON.stringify(newUser))
