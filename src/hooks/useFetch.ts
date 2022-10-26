@@ -24,7 +24,7 @@ export const useFetch = <T>(url: string) => {
 
 
 export const useTeste = ()=>{
-  const {response} = useFetch<CategorieProps[]>("http://localhost:5000/category")
+  const {response} = useFetch<CategorieProps[]>(`${process.env.NEXT_PUBLIC_API_URL}/category`)
 
 
   return{

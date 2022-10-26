@@ -14,6 +14,6 @@ export async function buy(id: string) {
     }),
   };
 
-  const addProduct = await fetch("http://localhost:5000/cart/add", requestInfo);
+  const addProduct = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart/add`, requestInfo);
 
 }

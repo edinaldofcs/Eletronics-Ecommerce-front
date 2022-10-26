@@ -44,10 +44,10 @@ const Product: NextPage<any> = ({ product }) => {
     };
 
     const addProduct = await fetch(
-      "http://localhost:5000/cart/add",
+      `${process.env.NEXT_PUBLIC_API_URL}0/cart/add`,
       requestInfo
     );
-    const data = await fetch(`http://localhost:5000/user/updateUserCart`, {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/updateUserCart`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
