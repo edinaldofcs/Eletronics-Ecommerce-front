@@ -16,7 +16,7 @@ const Register: NextPage = () => {
   const [created, setCreated] = useState(false);
 
   const onSubmit = async (values: any, actions: any) => {
-    delete values.confirmpassword;
+    delete values.confirmpassword;    
     
     const requestInfo = {
       method: "POST",
@@ -25,13 +25,14 @@ const Register: NextPage = () => {
         "Content-Type": "application/json",
         Accept: "application/json",
       }),
-    };
+    };   
 
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
       requestInfo
-    );
-    console.log(data);
+    );    
+    console.log(await data.json())
+    return
 
     if (data.status === 201) {
       setCreated(true);
@@ -111,7 +112,7 @@ const Register: NextPage = () => {
             </span>
           </div>
           <div className="flex flex-col">
-            <label htmlFor="password">Senha</label>
+            <label htmlFor="password2">Senha</label>
             <input
               type="password"
               id="password2"

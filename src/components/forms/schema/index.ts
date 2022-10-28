@@ -31,6 +31,6 @@ export const register = yup.object().shape({
     .required("Senha inválida"),
   confirmpassword: yup
     .string()
-    .oneOf([yup.ref("password"), null])
+    .oneOf([yup.ref("password2"), null])
     .required("Preencha este campo"),
 });
