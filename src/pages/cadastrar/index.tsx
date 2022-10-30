@@ -16,23 +16,28 @@ const Register: NextPage = () => {
   const [created, setCreated] = useState(false);
 
   const onSubmit = async (values: any, actions: any) => {
-    delete values.confirmpassword;    
+    delete values.confirmpassword;  
+    
+    const infos = {
+      name: values.name,
+      email: values.email2,
+      password: values.password2
+    }
     
     const requestInfo = {
       method: "POST",
-      body: JSON.stringify(values),
+      body: JSON.stringify(infos),
       headers: new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
       }),
     };   
-
+    console.log(requestInfo)
+    // return
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
       requestInfo
-    );    
-    console.log(await data.json())
-    return
+      ); 
 
     if (data.status === 201) {
       setCreated(true);
@@ -40,7 +45,6 @@ const Register: NextPage = () => {
         router.push("/login");
       }, 1000);
     }
-
     // actions.resetForm();
   };
 
