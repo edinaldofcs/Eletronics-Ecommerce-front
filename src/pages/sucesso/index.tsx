@@ -21,19 +21,18 @@ export async function getServerSideProps(context: any) {
     if (data.status == 200) {
       const cart = await data.json();
 
-      return { props: { cart } };
+      return { props: { clear: true } };
     }
-    return { props: { cart: false } };
+    return { props: { clear: false } };
   }
-  return { props: { cart: false } };
+  return { props: { clear: false } };
 }
 
-const Success: NextPage<{ cart: CartProps[] | boolean | [] }> = ({ cart }) => {
+const Success: NextPage<{ clear: boolean }> = ({ clear }) => {
   const { user, updateUser } = useUserContext();
-  const [carIsNotEmpty, setCarIsNotEmpty] = useState(cart);
 
   useEffect(() => {
-    if (typeof carIsNotEmpty == "object" && carIsNotEmpty.length == 0) {
+    if (clear) {
       const myUser = localStorage.getItem("eletronics");
 
       if (myUser) {
@@ -41,9 +40,9 @@ const Success: NextPage<{ cart: CartProps[] | boolean | [] }> = ({ cart }) => {
         localStorage.setItem("eletronics", JSON.stringify(newUser));
         updateUser(newUser)
       }
-      setCarIsNotEmpty(true);
+    
     }
-  }, [carIsNotEmpty]);
+  },[]);
 
   return (
     <div className="h-96 flex flex-col items-center justify-center">
