@@ -32,8 +32,7 @@ const Register: NextPage = () => {
         Accept: "application/json",
       }),
     };   
-    console.log(requestInfo)
-    // return
+       
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
       requestInfo
