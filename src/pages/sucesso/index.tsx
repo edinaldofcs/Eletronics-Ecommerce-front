@@ -38,8 +38,8 @@ const Success: NextPage<{ cart: CartProps[] | boolean | [] }> = ({ cart }) => {
 
       if (myUser) {
         const newUser = { ...JSON.parse(myUser), cart: [] };
-        updateUser(newUser)
         localStorage.setItem("eletronics", JSON.stringify(newUser));
+        updateUser(newUser)
       }
       setCarIsNotEmpty(true);
     }
