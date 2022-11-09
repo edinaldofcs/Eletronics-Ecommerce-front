@@ -9,7 +9,7 @@ const CategoryCard: NextPage<CategorieProps> = ({id, name, img}) => {
           <img
             className="max-w-[100%] max-h-[100%]"
             src={img}
-            alt="teste"
+            alt={name}
           />
         </div>
         <div className="">
